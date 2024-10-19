@@ -1,5 +1,5 @@
 {{ config(
-    materialized='table'  -- Create a table for the fact
+    materialized='table'
 ) }}
 
 WITH sales_base AS (
@@ -12,14 +12,14 @@ WITH sales_base AS (
         s.Store_ID AS store_id,
         sp.Salesperson_ID AS salesperson_id,
         od.Quantity AS quantity_sold,
-        od.UnitPrice AS unit_price,
-        (od.Quantity * od.UnitPrice) AS total_amount
-    FROM {{ ref('stg_salesorders') }} o
-    JOIN {{ ref('stg_salesorderdetails') }} od ON o.Order_ID = od.Order_ID
+        od.Unit_Price AS unit_price,
+        (od.Quantity * od.Unit_Price) AS total_amount
+    FROM {{ ref('stg_salesorder') }} o
+    JOIN {{ ref('stg_salesorderdetail') }} od ON o.Order_ID = od.Order_ID
     JOIN {{ ref('stg_produits') }} p ON od.Product_ID = p.Product_ID
-    JOIN {{ ref('stg_customers') }} c ON o.Customer_ID = c.Customer_ID
-    JOIN {{ ref('stg_stores') }} s ON o.Store_ID = s.Store_ID
-    JOIN {{ ref('stg_salespersons') }} sp ON o.SalespersonID = sp.Salesperson_ID
+    JOIN {{ ref('stg_customer') }} c ON o.Customer_ID = c.Customer_ID
+    JOIN {{ ref('stg_store') }} s ON o.Store_ID = s.Store_ID
+    JOIN {{ ref('stg_sales_person') }} sp ON o.Salesperson_ID = sp.Salesperson_ID
 )
 
 SELECT

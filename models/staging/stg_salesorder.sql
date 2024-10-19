@@ -1,5 +1,5 @@
 {{ config(
-    materialized='view'  -- 'view' or 'table' depending on your needs
+    materialized='view'
 ) }}
 
 SELECT  [order_id]
@@ -7,4 +7,5 @@ SELECT  [order_id]
       ,[order_date]
       ,[total_amount]
       ,store_id
+      ,salesperson_id
   FROM [Ventes_FTX].[trans_actions].[SalesOrder]

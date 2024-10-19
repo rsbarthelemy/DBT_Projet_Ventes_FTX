@@ -1,5 +1,5 @@
 {{ config(
-    materialized='table'  -- Create a table, not just a view
+    materialized='table'
 ) }}
 
 WITH base_store AS (
@@ -15,7 +15,7 @@ WITH base_store AS (
 )
 
 SELECT
-    ROW_NUMBER() OVER (ORDER BY store_id_id) AS store_key,  -- Surrogate key
+    ROW_NUMBER() OVER (ORDER BY store_id) AS store_key,  -- Surrogate key
     store_id,
   store_name,
    locationstore,

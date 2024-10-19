@@ -1,24 +1,25 @@
 {{ config(
-    materialized='table'  -- Create a table, not just a view
+        materialized='table'
 ) }}
 
 WITH base_customer AS (
-    SELECT  [customer_id]
-      ,[first_name]
-      ,[last_name]
-      ,[email]
-      ,[phone_number]
-      ,[city]
-      ,[country]
-    FROM {{ ref('stg_customer') }}  -- Using the staging model as source
+    SELECT  
+        [customer_id],
+        [first_name],
+        [last_name],
+        [email],
+        [phone_number],
+        [city],
+        [country]
+    FROM {{ ref('stg_customer') }}  
 )
 
 SELECT
-    ROW_NUMBER() OVER (ORDER BY customer_id_id) AS customer_key,  -- Surrogate key
+    ROW_NUMBER() OVER (ORDER BY customer_id) AS customer_key,  -- Surrogate key
     customer_id,
-    [first_name] + '' +[last_name]as customer_name,
+    [first_name] + ' ' + [last_name] AS customer_name,  -- Added space between names
     email,
     phone_number,
     city,
     country
-    FROM base_customer
+FROM base_customer

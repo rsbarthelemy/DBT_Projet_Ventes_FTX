@@ -1,16 +1,16 @@
 {{ config(
-    materialized='table'  -- We want to materialize this as a table
+    materialized='table'
 ) }}
 
 WITH dates AS (
     SELECT
-        DATEADD(DAY, number, '2024-01-01') AS date  -- Generates a series of dates
+        DATEADD(DAY, number, '2024-01-01') AS date 
     FROM master..spt_values
-    WHERE type = 'P' AND number <= DATEDIFF(DAY, '2024-01-01', '2024-12-31')  -- Adjust date range as necessary
+    WHERE type = 'P' AND number <= DATEDIFF(DAY, '2024-01-01', '2024-12-31') 
 )
 
 SELECT
-    CAST(CONVERT(VARCHAR(10), date, 112) AS INT) AS date_key,  -- Surrogate key for the Date Dimension (formatted as YYYYMMDD)
+    CAST(CONVERT(VARCHAR(10), date, 112) AS INT) AS date_key,  
     date AS full_date,
     YEAR(date) AS year,
     MONTH(date) AS month,

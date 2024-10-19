@@ -1,5 +1,5 @@
 {{ config(
-    materialized='view'  -- 'view' or 'table' depending on your needs
+    materialized='view'
 ) }}
 
 SELECT  [customer_id]

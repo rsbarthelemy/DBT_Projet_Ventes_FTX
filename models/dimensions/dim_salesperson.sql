@@ -1,5 +1,5 @@
 {{ config(
-    materialized='table'  -- Create a table, not just a view
+    materialized='table'
 ) }}
 
 WITH base_person AS (
@@ -9,13 +9,13 @@ WITH base_person AS (
       ,[last_name]
       ,[email]
       ,[store_id]
-    FROM {{ ref('stg_sales_person') }}  -- Using the staging model as source
+    FROM {{ ref('stg_sales_person') }}
 )
 
 SELECT
-    ROW_NUMBER() OVER (ORDER BY salesperson_id) AS salesperson_key,  -- Surrogate key
+    ROW_NUMBER() OVER (ORDER BY salesperson_id) AS salesperson_key, 
     salesperson_id,
-    fisrt_name,
+    first_name,
     last_name,
     email,
     store_id

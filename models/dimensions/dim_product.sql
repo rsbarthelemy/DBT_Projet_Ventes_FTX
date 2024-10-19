@@ -1,21 +1,21 @@
 {{ config(
-    materialized='table'  -- Create a table, not just a view
+    materialized='table'
 ) }}
 
 WITH base AS (
     SELECT
         product_id,
-        product_name,
+        productname,
         category,
-        unit_price,
+        price
         
-    FROM {{ ref('stg_produits') }}  -- Using the staging model as source
+    FROM {{ ref('stg_produits') }}
 )
 
 SELECT
-    ROW_NUMBER() OVER (ORDER BY product_id) AS product_key,  -- Surrogate key
+    ROW_NUMBER() OVER (ORDER BY product_id) AS product_key, 
     product_id,
-    product_name,
+    productname,
     category,
-    unit_price
+    price
 FROM base
