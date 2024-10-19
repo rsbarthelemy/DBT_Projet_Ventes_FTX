@@ -1,6 +1,6 @@
 
 
-dbt_Projet_Ventes:
+dbt_projet_ventes:
   target: dev
   outputs:
     dev:
@@ -13,4 +13,4 @@ dbt_Projet_Ventes:
       trust_cert: True
 
 
-      
+ 
