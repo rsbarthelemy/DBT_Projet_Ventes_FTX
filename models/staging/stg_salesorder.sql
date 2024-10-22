@@ -4,7 +4,7 @@
 
 SELECT  [order_id]
       ,[customer_id]
-      ,[order_date]
+      ,CAST(CONVERT(VARCHAR(10), order_date, 112) AS INT) as order_date
       ,[total_amount]
       ,store_id
       ,salesperson_id
