@@ -1,0 +1,10 @@
+{
+    "dbt.dbtIntegration": "core",
+    "dbt.deferConfigPerProject": {
+        "": {
+            "deferToProduction": true,
+            "favorState": true
+        }
+    },
+    "dbt.enableNewLineagePanel": true
+}
