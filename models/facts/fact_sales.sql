@@ -6,7 +6,7 @@ WITH sales_base AS (
     SELECT
         o.Order_ID AS sales_order_id,
         o.Order_Date AS order_date,
-      
+        
         p.Product_ID AS product_id,
         c.Customer_ID AS customer_id,
         s.Store_ID AS store_id,
@@ -20,6 +20,7 @@ WITH sales_base AS (
     JOIN {{ ref('stg_customer') }} c ON o.Customer_ID = c.Customer_ID
     JOIN {{ ref('stg_store') }} s ON o.Store_ID = s.Store_ID
     JOIN {{ ref('stg_sales_person') }} sp ON o.Salesperson_ID = sp.Salesperson_ID
+    JOIN {{ ref('dim_date') }} dd ON dd.date_key = o.order_date
 )
 
 SELECT
